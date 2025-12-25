@@ -20,6 +20,9 @@ func RouteController() *gin.Engine {
 	}
 	{
 		// 图片识别路由
+		ImageGroup := enterRouter.Group("/ImageRecognition")
+		ImageGroup.Use(jwt.Verify()) // 使用前需要jwt认证
+		ImageRecognitionRouter(ImageGroup)
 	}
 	{
 		// comfyui的文生图路由，或者图片的二次渲染
