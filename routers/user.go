@@ -11,5 +11,5 @@ func userRouter(rg *gin.RouterGroup) {
 	rg.POST("/register", user.Register)
 	verificationGroup := rg.Group("/verification")
 	verificationGroup.POST("/email", user.VerificationEmail)
-	verificationGroup.POST("/phone", user.VerificationPhone)
+	// verificationGroup.POST("/phone", user.VerificationPhone)后续可以添加手机验证码
 }
