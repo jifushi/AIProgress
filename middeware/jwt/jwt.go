@@ -7,7 +7,7 @@ import (
 
 	common_code "AiProgress/common/code"
 	"AiProgress/controller"
-	utls_jwt "AiProgress/utls/jwt"
+	utils_jwt "AiProgress/utils/jwt"
 
 	"github.com/gin-gonic/gin"
 )
@@ -39,7 +39,7 @@ func Verify() gin.HandlerFunc {
 
 		log.Println("token is ", token)
 		// 2. 校验token是否合法
-		username, ok := utls_jwt.ParseToken(token)
+		username, ok := utils_jwt.ParseToken(token)
 		if !ok {
 			ctx.JSON(http.StatusOK, res.CodeOf(common_code.CodeInvalidToken))
 			// 中断请求
