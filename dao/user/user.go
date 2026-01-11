@@ -18,7 +18,7 @@ func InsertUser(username string, password string, email string) (*model.User, er
 	var user model.User
 	user = model.User{
 		Name:     username,
-		Username: username,
+		UserName: username,
 		Password: password,
 		Email:    email,
 	}
