@@ -21,11 +21,11 @@ type Config struct {
 
 // MysqlConfig MySQL配置结构体
 type MysqlConfig struct {
-	Host     string   `yaml:"host"`
-	Port     int      `yaml:"port"`
-	Users    []string `yaml:"users"`
-	Password string   `yaml:"password"`
-	Database string   `yaml:"database"`
+	Host     string `yaml:"host"`
+	Port     int    `yaml:"port"`
+	User     string `yaml:"user"`
+	Password string `yaml:"password"`
+	Database string `yaml:"database"`
 }
 
 // RedisConfig Redis配置结构体
@@ -40,13 +40,15 @@ type RabbitmqConfig struct {
 	Port     int    `yaml:"port"`
 	Username string `yaml:"username"`
 	Password string `yaml:"password"`
+	Vhost    string `yaml:"vhost"`
 }
 
 // JwtConfig JWT配置结构体
 type JwtConfig struct {
-	Secret     string `yaml:"secret"`
 	Expiration int    `yaml:"expiration"`
 	Issuer     string `yaml:"issuer"`
+	Subject    string `yaml:"subject"`
+	Secret     string `yaml:"secret"`
 }
 
 // AliyunConfig 阿里云配置结构体

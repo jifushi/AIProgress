@@ -99,5 +99,6 @@ func VerificationEmail(ctx *gin.Context) {
 	if code != common_code.CodeSuccess {
 		ctx.JSON(http.StatusOK, res.CodeOf(code))
 	}
-	ctx.JSON(http.StatusOK, res.CodeOf(common_code.CodeSuccess))
+	res.CodeOf(common_code.CodeSuccess)
+	ctx.JSON(http.StatusOK, res)
 }

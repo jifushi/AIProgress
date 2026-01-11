@@ -18,6 +18,8 @@ const (
 	CodeIllegalPassword  Code = 2010
 	CodeEmailNotExist    Code = 2011
 	CodePasswordError    Code = 2012
+	CodeSQLError         Code = 2013
+	CodeRedisError       Code = 2014
 
 	CodeForbidden Code = 3001
 
@@ -43,6 +45,8 @@ var msg = map[Code]string{
 	CodeIllegalPassword:  "密码不合法",
 	CodeEmailNotExist:    "邮箱不存在",
 	CodePasswordError:    "密码错误",
+	CodeSQLError:         "数据库错误",
+	CodeRedisError:       "Redis缓存错误",
 
 	CodeForbidden: "权限不足",
 

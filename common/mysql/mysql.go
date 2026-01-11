@@ -56,7 +56,11 @@ func Init() error {
 }
 
 func Migrate() error {
-	err := db.AutoMigrate(&model.User{})
+	err := db.AutoMigrate(
+		&model.User{},
+		&model.Message{},
+		&model.Session{},
+	)
 	if err != nil {
 		log.Fatalf("数据库迁移失败: %v", err)
 		return err
@@ -65,17 +69,66 @@ func Migrate() error {
 	return nil
 }
 
+/*
+*********************************
+
+	对用户做增删改查操作
+
+**********************************
+*/
 func InsertUser(user *model.User) error {
-	err := db.Create(&user).Error
+	err := db.Create(user).Error
 	return err
 }
 
 func GetUserByUsername(username string, user *model.User) error {
-	err := db.Where("username = ?", username).First(user).Error
+	err := db.Where("user_name = ?", username).First(user).Error
 	return err
 }
 
 func GetUserByEmail(email string, user *model.User) error {
 	err := db.Where("email =?", email).First(user).Error
 	return err
+}
+
+/*
+*********************************
+
+	对消息做增删改查操作
+
+**********************************
+*/
+func InsertMessage(message *model.Message) error {
+	err := db.Create(message).Error
+	return err
+}
+
+func SelectMessages(username, sessionid string) ([]model.Message, error) {
+	var messages []model.Message
+	err := db.Table("messages").Where("user_name =? AND session_id =?", username, sessionid).Find(&messages).Error
+	if err != nil {
+		return nil, err
+	}
+	return messages, nil
+}
+
+/*
+*********************************
+
+	对会话做增删改查操作
+
+**********************************
+*/
+func InsertSession(session *model.Session) error {
+	err := db.Create(session).Error
+	return err
+}
+
+func SelectSessions(username string) ([]model.Session, error) {
+	var sessions []model.Session
+	err := db.Table("sessions").Select("DISTINCT id").Where("user_name = ?", username).Find(&sessions).Error
+	if err != nil {
+		return nil, err
+	}
+	return sessions, nil
 }
